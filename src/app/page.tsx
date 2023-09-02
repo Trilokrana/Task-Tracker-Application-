@@ -6,7 +6,7 @@ import { authOptions } from "./api/auth/[...nextauth]/route";
 export default async function Home() {
 
   const authOptions = {
-    secret: "process.env.NEXTAUTH_SECRET", 
+    secret: "Trilok", 
     session: {
       strategy: "jwt",
     }, 
