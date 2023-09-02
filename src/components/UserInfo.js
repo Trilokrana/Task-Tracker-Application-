@@ -1,0 +1,86 @@
+"use client";
+import React, { useState, useRef } from "react";
+import styles from '@/styles/app.module.css'
+
+function App() {
+  const [todoList, setTodoList] = useState([]);
+  const [currentTask, setCurrentTask] = useState("");
+  const inputTask = useRef(null);
+
+  const addTask = async () => {
+    setTodoList([...todoList, { task: currentTask, completed: false }]);
+    setCurrentTask("");
+    inputTask.current.value = "";
+
+    try {
+      const response = await fetch("/api/userTasks", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ task: currentTask }),
+      });
+
+      if (response.status === 201) {
+        const newTask = await response.json();
+        setTodoList([...todoList, newTask]);
+        setCurrentTask("");
+        inputTask.current.value = "";
+      } else {
+        console.error("Error creating task");
+      }
+    } catch (error) {
+      console.error("Error creating task:", error);
+    }
+
+
+  };
+
+  const deleteTask = (taskToDelete) => {
+    setTodoList(todoList.filter((task) => {
+      return task.task !== taskToDelete;
+    }));
+  };
+
+  const completeTask = (taskToComplete) => {
+    setTodoList(todoList.map((task) => {
+      return task.task === taskToComplete
+        ? { ...task, completed: true } : task;
+    }));
+  };
+
+  return (
+    <div className={styles.App}>
+      <div className={styles.taskbar}>
+        <h1>Task List</h1>
+        <input className={styles.input}
+          ref={inputTask}
+          type="text"
+          placeholder="Task......"
+          onKeyDown={(event) => {
+            if (event.keyCode == 13) {
+              addTask()
+            }
+          }}
+          onChange={(e) => setCurrentTask(e.target.value)}
+          value={currentTask}
+        />
+        <button className={styles.button} onClick={addTask}>Add Task</button>
+      </div>
+      <ul className={styles.ul}>
+        {todoList.map((val, key) => {
+          return (
+            <div className={styles.task} id="task" key={key}>
+              <li className={styles.li}>{val.task}</li>
+              <button className={styles.btn} id="complete" onClick={() => { completeTask(val.task) }}>completed</button>
+              <button className={styles.btn} id="del" onClick={() => { deleteTask(val.task) }}>Delete</button>
+              {val.completed ? <h1>Task Completed</h1> : <h2> Task not Completed</h2>}
+            </div>
+          )
+        })}
+      </ul>
+    </div>
+  );
+}
+
+export default App;

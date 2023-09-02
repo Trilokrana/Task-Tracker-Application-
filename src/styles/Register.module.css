@@ -1,0 +1,181 @@
+/*-----for Sign-up-----*/
+.Signup_form{
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    width: 450px;
+    height: 500px;
+    padding: 20px;
+    margin-left:35%;
+    margin-top: 8%;
+    border-radius: 20px;
+    box-shadow: 1px 1px 10px 1px rgb(116, 112, 112);   
+    
+}
+
+.Signup_form h1{
+    position: relative;
+    font-size: 2rem;
+    font-weight: bolder;
+    margin-left: 10rem;
+
+}
+.input_box{
+    display: flex;
+    font-size: 1.5rem;
+    margin-left: 4rem;
+    padding: 15px;
+    gap: 0;
+    margin-top:20px;
+    
+}
+.input_box input{
+    width: 260px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    opacity: 1;
+    font-size: 1.2rem;
+    border-bottom: 2px solid #aaaaaa;
+    
+    
+}
+#svg{
+    position: absolute;
+    margin-left: -50px;
+    margin-top: 20px;
+   transform: translateY(-50%);
+}
+.Signup_form button{
+    width: 20rem;
+    height: 50px;
+    background-color: #7d2ae8;
+    border-radius: 15px;
+    margin-top: 30px;
+    margin-left: 50px;
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: aliceblue;
+}
+.Remember{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 35px;
+    
+}
+.Remember input{
+    margin-right: -120px;
+    margin-top:3px;
+    
+    
+}
+
+.Remember p:hover{
+    text-decoration: underline; 
+    color: #7d2ae8; 
+    cursor: pointer; 
+}
+
+#donot{
+    margin-left: 90px;
+    padding: 10px;
+}
+.login:hover{
+    text-decoration: underline; 
+    color: #7d2ae8; 
+    cursor: pointer; 
+}
+.error{
+    color: rgb(237, 128, 128);
+    margin-left: 30px;
+    padding: 5px;
+}
+
+
+/*-----for Login-------*/
+.Login_form{
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    width: 450px;
+    height: 500px;
+    padding: 20px;
+    margin-left:35%;
+    margin-top: 8%;
+    border-radius: 20px;
+    box-shadow: 1px 1px 10px 1px rgb(116, 112, 112);
+}
+
+
+
+.Login_form h1{
+    position: relative;
+    font-size: 2rem;
+    font-weight: bolder;
+    margin-left: 10rem;
+
+}
+.input_box{
+    display: flex;
+    font-size: 1.5rem;
+    margin-left: 4rem;
+    padding: 15px;
+    gap: 0;
+    margin-top:20px;
+    
+}
+.Login_form .input_box input{
+    width: 260px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    opacity: 1;
+    font-size: 1.2rem;
+    border-bottom: 2px solid #aaaaaa;
+}
+#svg{
+    position: absolute;
+    margin-left: -50px;
+    margin-top: 20px;
+   transform: translateY(-50%);
+}
+.Login_form button{
+    width: 20rem;
+    height: 50px;
+    background-color: #7d2ae8;
+    border-radius: 15px;
+    margin-top: 30px;
+    margin-left: 50px;
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: aliceblue;
+}
+.Remember{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 35px;
+    
+}
+.Remember input{
+    margin-right: -110px;
+    margin-top:3px;
+}
+.Remember p:hover{
+    text-decoration: underline; 
+    color: #7d2ae8; 
+    cursor: pointer; 
+}
+
+#donot{
+    margin-left: 90px;
+    padding: 10px;
+}
+.login:hover{
+    text-decoration: underline; 
+    color: #7d2ae8; 
+    cursor: pointer; 
+}
+
+
