@@ -11,29 +11,6 @@ function App() {
     setTodoList([...todoList, { task: currentTask, completed: false }]);
     setCurrentTask("");
     inputTask.current.value = "";
-
-    try {
-      const response = await fetch("/api/userTasks", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ task: currentTask }),
-      });
-
-      if (response.status === 201) {
-        const newTask = await response.json();
-        setTodoList([...todoList, newTask]);
-        setCurrentTask("");
-        inputTask.current.value = "";
-      } else {
-        console.error("Error creating task");
-      }
-    } catch (error) {
-      console.error("Error creating task:", error);
-    }
-
-
   };
 
   const deleteTask = (taskToDelete) => {
