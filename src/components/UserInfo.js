@@ -26,14 +26,12 @@ function App() {
         setTodoList([...todoList, newTask]);
         setCurrentTask("");
         inputTask.current.value = "";
-      } else {
-        console.error("Error creating task");
       }
     } catch (error) {
       console.error("Error creating task:", error);
     }
-
   };
+
   const deleteTask = (taskToDelete) => {
     setTodoList(todoList.filter((task) => {
       return task.task !== taskToDelete;
@@ -48,10 +46,10 @@ function App() {
     });
 
     setTodoList(updatedTodoList);
-    
+
     try {
       await fetch("/api/userTasks", {
-        method: "PUT", 
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -61,8 +59,6 @@ function App() {
       console.error("Error updating task status:", error);
     }
   };
-
-
   return (
     <div className={styles.App}>
       <div className={styles.taskbar}>
