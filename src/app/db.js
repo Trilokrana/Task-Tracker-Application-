@@ -1,17 +1,20 @@
 // db.js
-import mongoose from 'mongoose';
 
-const connectDB = async () => {
-  try {
-    const connection = await mongoose.connect('mongodb+srv://ranatrilok1234:Keyboard88@cluster0.0l7evoj.mongodb.net/', {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log(`MongoDB connected: ${connection.connection.host}`);
-  } catch (error) {
-    console.error(`Error connecting to MongoDB: ${error.message}`);
-    process.exit(1); 
+import mongoose from "mongoose";
+
+const connection = {};
+
+async function dbConnect() {
+  if (connection.isConnected) {
+    return;
   }
-};
 
-export default connectDB;
+  const db = await mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+
+  connection.isConnected = db.connections[0].readyState;
+}
+
+export default dbConnect;
