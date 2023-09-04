@@ -33,19 +33,18 @@ function App() {
       console.error("Error creating task:", error);
     }
 
+  };
+  const deleteTask = (taskToDelete) => {
+    setTodoList(todoList.filter((task) => {
+      return task.task !== taskToDelete;
+    }));
+  };
 
-    const deleteTask = (taskToDelete) => {
-      setTodoList(todoList.filter((task) => {
-        return task.task !== taskToDelete;
-      }));
-    };
-
-    const completeTask = (taskToComplete) => {
-      setTodoList(todoList.map((task) => {
-        return task.task === taskToComplete
-          ? { ...task, completed: true } : task;
-      }));
-    };
+  const completeTask = (taskToComplete) => {
+    setTodoList(todoList.map((task) => {
+      return task.task === taskToComplete
+        ? { ...task, completed: true } : task;
+    }));
   };
 
   return (
