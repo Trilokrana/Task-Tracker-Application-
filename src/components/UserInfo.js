@@ -11,19 +11,41 @@ function App() {
     setTodoList([...todoList, { task: currentTask, completed: false }]);
     setCurrentTask("");
     inputTask.current.value = "";
-  };
 
-  const deleteTask = (taskToDelete) => {
-    setTodoList(todoList.filter((task) => {
-      return task.task !== taskToDelete;
-    }));
-  };
+    try {
+      const response = await fetch("/api/userTasks", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ task: currentTask }),
+      });
 
-  const completeTask = (taskToComplete) => {
-    setTodoList(todoList.map((task) => {
-      return task.task === taskToComplete
-        ? { ...task, completed: true } : task;
-    }));
+      if (response.status === 201) {
+        const newTask = await response.json();
+        setTodoList([...todoList, newTask]);
+        setCurrentTask("");
+        inputTask.current.value = "";
+      } else {
+        console.error("Error creating task");
+      }
+    } catch (error) {
+      console.error("Error creating task:", error);
+    }
+
+
+    const deleteTask = (taskToDelete) => {
+      setTodoList(todoList.filter((task) => {
+        return task.task !== taskToDelete;
+      }));
+    };
+
+    const completeTask = (taskToComplete) => {
+      setTodoList(todoList.map((task) => {
+        return task.task === taskToComplete
+          ? { ...task, completed: true } : task;
+      }));
+    };
   };
 
   return (
