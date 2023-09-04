@@ -40,12 +40,28 @@ function App() {
     }));
   };
 
-  const completeTask = (taskToComplete) => {
-    setTodoList(todoList.map((task) => {
+  const completeTask = async (taskToComplete) => {
+    const updatedTodoList = todoList.map((task) => {
       return task.task === taskToComplete
-        ? { ...task, completed: true } : task;
-    }));
+        ? { ...task, completed: true }
+        : task;
+    });
+
+    setTodoList(updatedTodoList);
+    
+    try {
+      await fetch("/api/userTasks", {
+        method: "PUT", 
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ task: taskToComplete, completed: true }),
+      });
+    } catch (error) {
+      console.error("Error updating task status:", error);
+    }
   };
+
 
   return (
     <div className={styles.App}>

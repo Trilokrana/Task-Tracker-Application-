@@ -1,26 +1,57 @@
+import { connectMongoDB } from "@/lib/mongodb";
+import Task from "@/models/task";
+import { NextResponse } from "next/server";
 
-import dbConnect from "../../../lib/db";
-import Task from "@/models/Task";
+export async function POST(req) {
+  try {
+    const { task, completed } = await req.json();
+    await connectMongoDB();
+    await Task.create({ task, completed });
 
-export default async function handler(req, res) {
-  await dbConnect();
+    return NextResponse.json(task);
+  } catch (error) {
+    return NextResponse.json(
+      { message: "An error occurred while adding the task." },
+      { status: 500 }
+    );
+  }
+}
 
-  if (req.method === "POST") {
-    try {
-      const task = new Task({ task: req.body.task });
-      await task.save();
-      res.status(201).json(task);
-    } catch (error) {
-      res.status(500).json({ error: "Error creating task" });
+export async function GET() {
+  try {
+    await connectMongoDB();
+    const tasks = await Task.find(); 
+
+    return NextResponse.json(tasks, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { message: "An error occurred while fetching tasks." },
+      { status: 500 }
+    );
+  }
+}
+
+export async function PUT(req) {
+  try {
+    const { task, completed } = await req.json();
+    await connectMongoDB();
+
+    
+    const updatedTask = await Task.findOneAndUpdate(
+      { task },
+      { completed },
+      { new: true } 
+    );
+
+    if (!updatedTask) {
+      return NextResponse.json({ message: "Task not found" }, { status: 404 });
     }
-  } else if (req.method === "GET") {
-    try {
-      const tasks = await Task.find();
-      res.status(200).json(tasks);
-    } catch (error) {
-      res.status(500).json({ error: "Error fetching tasks" });
-    }
-  } else {
-    res.status(405).json({ error: "Method not allowed" });
+
+    return NextResponse.json(updatedTask, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { message: "An error occurred while updating the task." },
+      { status: 500 }
+    );
   }
 }
