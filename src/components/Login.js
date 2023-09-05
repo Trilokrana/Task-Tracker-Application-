@@ -27,10 +27,10 @@ const Login = () => {
         
       });
       
-      /*if (res.error) {
+      if (res.error) {
         setError("Invalid Credentials");
         return;
-      }*/
+      }
 
       router.replace("/dashboard");
     } catch (error) {
