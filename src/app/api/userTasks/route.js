@@ -1,5 +1,6 @@
+
 import { connectMongoDB } from "@/lib/mongodb";
-import Task from "@/models/task";
+import { Task } from '@/models/model';
 import { NextResponse } from "next/server";
 
 export async function POST(req) {

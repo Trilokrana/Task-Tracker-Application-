@@ -111,10 +111,8 @@ const SignUp = () => {
                         {error}
                     </div>
                 )}
-                
                 <button className={mulish.className}>SignUp</button>
-            
-
+                
                 <div id={Styles.donot} className={mulish.className}>Already have an account ?
                     <Link className={Styles.login} href={'/'}> Login</Link>
                 </div>

@@ -24,12 +24,13 @@ const Login = () => {
         name,
         password,
         redirect: false,
+        
       });
-
-      if (res.error) {
+      
+      /*if (res.error) {
         setError("Invalid Credentials");
         return;
-      }
+      }*/
 
       router.replace("/dashboard");
     } catch (error) {

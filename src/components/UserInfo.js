@@ -32,11 +32,25 @@ function App() {
     }
   };
 
-  const deleteTask = (taskToDelete) => {
+  const deleteTask = async (taskToDelete) => {
     setTodoList(todoList.filter((task) => {
-      return task.task !== taskToDelete;
+      return !task.Delete == taskToDelete;
+      //!task.Delete;
     }));
-  };
+    
+
+    /*try {
+      await fetch("/api/userTasks", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ task: taskToDelete, Delete: true }),
+      });
+    } catch (error) {
+      console.error("Error updating task status:", error);
+    }*/
+  }
 
   const completeTask = async (taskToComplete) => {
     const updatedTodoList = todoList.map((task) => {
