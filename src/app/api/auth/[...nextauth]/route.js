@@ -1,5 +1,5 @@
 import { connectMongoDB } from "@/lib/mongodb";
-import { Task } from '@/models/model';
+import User  from '@/models/user';
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
@@ -11,11 +11,11 @@ export const authOptions = {
       credentials: {},
 
       async authorize(credentials) {
-        const {  email, password } = credentials;
+        const { email, password } = credentials;
 
         try {
           await connectMongoDB();
-          const user = await Task.findOne({ email });
+          const user = await User.findOne({ email});
 
           if (!user) {
             throw new Error("User not found");

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Styles from '@/styles/Register.module.css'
 import { Mulish } from "next/font/google";
 import Link from 'next/link';
-import { redirect } from "next/navigation";
+import { useRouter} from "next/navigation";
 const mulish = Mulish({ subsets: ["latin"] });
 
 const SignUp = () => {
@@ -12,12 +12,12 @@ const SignUp = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
-
+    const router = useRouter();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!name || !email || !password) {
+        if (!email ||!name || !password) {
             setError('All Fields are necessary to filled')
             return;
         }
@@ -44,17 +44,18 @@ const SignUp = () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    name,
                     email,
+                    name,
                     password,
                     
                 }),
             });
+            
 
             if (res.ok) {
                 const form = e.target;
                 form.reset();
-                redirect("/");
+                router.push("/");
             } else {
                 console.log("User registration failed.");
             }

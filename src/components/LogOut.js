@@ -2,7 +2,6 @@
 
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
-import { styles } from '@/styles/app.module.css';
 import Link from "next/link";
 
 
@@ -19,7 +18,7 @@ export default function UserInfo() {
                     <div>
                         Email: <span className="font-bold">{session?.user?.email}</span>
                     </div>
-                    <Link href={'/register'}>
+                    <Link href={'/'}>
                         <button
 
                             onClick={() => signOut()}
