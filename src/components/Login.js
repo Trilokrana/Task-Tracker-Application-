@@ -8,8 +8,8 @@ import { useState } from 'react';
 const mulish = Mulish({ subsets: ["latin"] });
 
 const Login = () => {
-  const [name, setName] = useState("")
   const [email, setEmail] = useState("")
+  const [name, setName] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
 

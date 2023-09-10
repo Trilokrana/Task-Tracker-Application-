@@ -7,8 +7,9 @@ import { useRouter} from "next/navigation";
 const mulish = Mulish({ subsets: ["latin"] });
 
 const SignUp = () => {
-    const [name, setName] = useState("")
+    
     const [email, setEmail] = useState("");
+    const [name, setName] = useState("")
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
