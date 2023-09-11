@@ -1,90 +1,252 @@
 .App {
-	text-align: center;
-    margin: 20px;
-    
-}
-.App h1{
-    font-size: 2rem;
-    letter-spacing: 2px;
-    font-weight: 600;
-}
-.input{
-    margin:10px;
-    width: auto;
-    height:auto;
-    font-size:1.5rem;
-    padding:8px;
-    padding-left: 20px;
-    letter-spacing: 2px;
-    border-radius:10px ;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    box-shadow: 0px 0px 0px 1px black;
-}
-.taskbar{
-    border-bottom: 3px solid #aaaaaa;
-    padding-bottom: 20px;
-}
-.button{
-    width: 120px;
-    height:50px;
-    font-size:22px;
-    font-weight: 600;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding: 8px;
-    letter-spacing: 1px;
-    border-radius:10px;
-    background-color:orange;
-}
-.button:hover{
-    background:#00df6c;
-    transition: 0.2s ease-out;
-}
-.ul{
-    display: grid;
-    place-items: center;
-    margin: 20px;
+  text-align: center;
+  margin: 20px;
+
 }
 
-.li{
-    list-style-type: none;
-    width:300px;
-    height:auto;
-    background-color:#00df6c;
-    margin:10px;
-    padding:8px;
+.App h1 {
+  font-size: 2rem;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+.input {
+  margin: 10px;
+  width: auto;
+  height: auto;
+  font-size: 1.5rem;
+  padding: 8px;
+  padding-left: 20px;
+  letter-spacing: 2px;
+  border-radius: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0px 0px 0px 1px black;
+}
+
+.taskbar {
+  border-bottom: 3px solid #aaaaaa;
+  padding-bottom: 20px;
+}
+
+.button {
+  height: 50px;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 8px;
+  padding-left: 15px;
+  padding-right: 20px;
+  margin-left: 10px;
+  color: white;
+  letter-spacing: 1px;
+  border-radius: 10px;
+  background-color: #6b7280;
+}
+
+.button:hover {
+  background: #4b5563;
+  transition: 0.2s ease-out;
+}
+
+.ul {
+  display: grid;
+  place-items: center;
+  margin: 20px;
+}
+
+.li {
+  list-style-type: none;
+  width: 100%; 
+  height: auto;
+  background-color:#6b7280;
+  margin: 10px;
+  padding: 8px;
+  font-size: 1.3rem;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 8px;
+  opacity: 0.9;
+  box-shadow: 1px 1px 5px 1px rgb(182, 179, 179);
+
+}
+.li:hover{
+  background-color: #4b5563;
+  transition: 0.3s ease-out;
+}
+
+.task {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px;
+}
+
+.delete {
+  width: 60px;
+  height: 50px;
+  display: flex;
+  background-color: #6b7280;
+  cursor: pointer;
+  padding: 8px;
+  padding-left: 18px;
+  padding-top: 13px;
+  border-radius: 8px;
+  color: white;
+  margin-right: 8px;
+  margin: 10px;
+}
+.completed{
+  width: 60px;
+  height: 50px;
+  display: flex;
+  background-color: #6b7280;
+  cursor: pointer;
+  padding: 8px;
+  padding-left: 18px;
+  padding-top: 13px;
+  border-radius: 8px;
+  color: white;
+  margin-right: 8px;
+  margin: 10px;
+}
+.completed:hover {
+  background-color: #16a34a;
+  transition: 0.2s ease-out; 
+}
+.delete:hover{
+  background-color: #4b5563;
+  transition: 0.2s ease-out;
+}
+
+
+.ul h2 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.1rem;
+}
+
+.ul h1 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.2rem;
+}
+
+/*for small screen like phones*/
+@media only screen and (max-width: 600px) {
+  .App {
+    margin: 10px;
+  }
+
+  .taskbar {
+    padding-bottom: 10px;
+  }
+
+  .input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .button {
+    width: 100%;
+    font-size: 18px;
+  }
+
+  .ul {
+    margin: 10px;
+  }
+
+  .li {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .btn {
+    width: 45%;
+    font-size: 14px;
+  }
+
+  .task {
+    flex-direction: column;
+  }
+}
+
+/*for medium screens (tablet)*/
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  .App {
+    margin: 20px;
+  }
+
+  .taskbar {
+    padding-bottom: 15px;
+  }
+
+  .input {
+    width: auto;
+  }
+
+  .button {
+    width: auto;
+    font-size: 22px;
+  }
+
+  .li {
+    width: 300px;
     font-size: 1.3rem;
-    color: white;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    border-radius: 8px;
-    
-}
-.task{
-    display :flex;
-    flex-direction: row;
-    align-items: center;
-}
-.btn{
+  }
+
+  .btn {
     width: 100px;
-    height: auto;
-    padding: 5px;
     font-size: 1.1rem;
-    color: white;
-    margin:8px;
-    cursor:pointer;
-    font-weight: 600;
-    border-radius: 8px;
-    background-color:orange;
-    
+  }
 }
-.btn:hover{
-    background-color:rgb(212, 138, 0);
-    transition: 0.2s ease-out;
+
+/* Add styling for large screens (desktops) */
+@media only screen and (min-width: 1025px) {
+  .App {
+    margin: 40px;
+  }
+
+  .taskbar {
+    padding-bottom: 20px;
+  }
+
+  .input {
+    width: auto;
+  }
+
+  .button {
+    width: auto;
+    font-size: 24px;
+  }
+
+  .li {
+    width: 400px;
+    font-size: 1.4rem;
+  }
+
+  .btn {
+    width: 120px;
+    font-size: 1.2rem;
+  }
 }
-.ul h2{
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 1.1rem;
+
+/*  styles for the logout button */
+
+.w-50 {
+  width: 50px;
 }
-.ul h1{
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 1.2rem ;
+
+/* Medium screens (tablets) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  
+  .relative{
+    width: auto; 
+    font-size: 12px; 
+  }
 }
+
+/* Large screens (desktops) */
+@media (min-width: 1025px) {
+  .w-50 {
+    width: auto; /* Reset the width for large screens */
+    font-size: 24px; /* Adjust font size for large screens */
+  }
+}
+
