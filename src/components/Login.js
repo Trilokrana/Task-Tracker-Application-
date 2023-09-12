@@ -32,7 +32,7 @@ const Login = () => {
       }
 
       router.replace("dashboard");
-    } catch (error) {
+    } catch (erro) {
       console.log(error);
     }
   };
