@@ -32,8 +32,8 @@ const Login = () => {
       }
 
       router.replace("dashboard");
-    } catch (erro) {
-      console.log(error);
+    } catch (e) {
+      console.log(e);
     }
   };
   return (
