@@ -31,7 +31,7 @@ const Login = () => {
         return;
       }
 
-      router.replace("dashboard");
+      router.replace("/dashboard");
     } catch (e) {
       console.log(e);
     }

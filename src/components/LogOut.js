@@ -22,7 +22,7 @@ export default function UserInfo() {
         <div className="relative">
             <button
                 onClick={toggleDropdown}
-                className="fixed top-5 right-55 left-5 bg-gray-500 text-white font-bold px-6 py-2 rounded-lg hover:bg-gray-600 transition duration-300"
+                className="fixed top-5 right-55 left-5 bg-gray-600 text-white font-bold px-6 py-2 rounded-lg hover:#52525b transition duration-300"
             >
                 <div className="w-30 flex p-1">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -39,7 +39,7 @@ export default function UserInfo() {
                         <div className="text-lg font-bold">Name: {session?.user?.name}</div>
                         <div className="text-lg font-bold">Email: {session?.user?.email}</div>
                     </div>
-                    <Link href={"/"}>
+                    <Link href="/">
                         <button
                             onClick={handleSignOut}
                             className="bg-red-500 text-white font-bold px-6 py-2 rounded-lg hover:bg-red-600 transition duration-300"

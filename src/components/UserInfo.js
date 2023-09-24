@@ -5,49 +5,77 @@ import styles from '@/styles/app.module.css'
 function App() {
   const [todoList, setTodoList] = useState([]);
   const [currentTask, setCurrentTask] = useState("");
+  const [editingTask, setEditingTask] = useState(null); // New state for tracking editing
   const inputTask = useRef(null);
 
   const addTask = async () => {
-    setTodoList([...todoList, { task: currentTask, completed: false }]);
+    if (editingTask) {
+      // Update the existing task
+      const updatedTodoList = todoList.map((task) => {
+        if (task.task === editingTask) {
+          return { ...task, task: currentTask };
+        }
+        return task;
+      });
+      setTodoList(updatedTodoList);
+      setEditingTask(null); // Clear editing state
+    } else {
+      // Add a new task
+      setTodoList([...todoList, { task: currentTask, completed: false }]);
+    }
+
     setCurrentTask("");
     inputTask.current.value = "";
 
     try {
-      const response = await fetch("/api/userTasks", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ task: currentTask }),
-      });
+      if (editingTask) {
+        // Handle the edit request
+        const response = await fetch("/api/userTasks", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ task: editingTask, newTask: currentTask }), // Send both editingTask and newTask
+        });
 
-      if (response.status === 201) {
-        const newTask = await response.json();
-        setTodoList([...todoList, newTask]);
-        setCurrentTask("");
-        inputTask.current.value = "";
+        if (response.status === 200) {
+          console.log("Task updated in the database.");
+        } else {
+          console.error("Error updating task in the database.");
+        }
+      } else {
+        // Handle the add request
+        const response = await fetch("/api/userTasks", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ task: currentTask }),
+        });
+
+        if (response.status === 201) {
+          const newTask = await response.json();
+          setTodoList([...todoList, newTask]);
+        }
       }
     } catch (error) {
-      console.error("Error creating task:", error);
+      console.error("Error creating/updating task:", error);
     }
   };
 
-  const deleteTask = async (taskToDelete) => {
-    setTodoList(todoList.filter((task) => {
-      return task.task !== taskToDelete;
-    }));
-
+  const deleteTask = async (taskId) => {
     try {
-      const response = await fetch("/api/userTasks", {
+      const response = await fetch(`/api/userTasks?id=${taskId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ task: taskToDelete, completed: false }),
       });
-
+  
       if (response.status === 200) {
         console.log("Task deleted from the database.");
+        // Remove the task from the todoList after successful deletion
+        setTodoList(todoList.filter((task) => task.task !== taskId));
       } else {
         console.error("Error deleting task from the database.");
       }
@@ -55,6 +83,7 @@ function App() {
       console.error("Error deleting task:", error);
     }
   };
+  
 
 
   const completeTask = async (taskToComplete) => {
@@ -78,6 +107,13 @@ function App() {
       console.error("Error updating task status:", error);
     }
   };
+
+  const editTask = (taskToEdit) => {
+    setEditingTask(taskToEdit);
+    setCurrentTask(taskToEdit);
+    inputTask.current.value = taskToEdit;
+  };
+
   return (
     <div className={styles.App}>
       <div className={styles.taskbar}>
@@ -87,8 +123,8 @@ function App() {
           type="text"
           placeholder="Task......"
           onKeyDown={(event) => {
-            if (event.keyCode == 13) {
-              addTask()
+            if (event.keyCode === 13) {
+              addTask();
             }
           }}
           onChange={(e) => setCurrentTask(e.target.value)}
@@ -115,9 +151,16 @@ function App() {
                   </svg>
                 </button>
               </div>
-              {val.completed ? <h1>Task Completed</h1> : <h2> Task not Completed</h2>}
+              <div className={styles.edit}>
+                <button className={styles.btn} id="edit" onClick={() => { editTask(val.task) }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                  </svg>
+                </button>
+              </div>
+              {val.completed ? <h1>Task Completed</h1> : <h2>Task not Completed</h2>}
             </div>
-          )
+          );
         })}
       </ul>
     </div>
